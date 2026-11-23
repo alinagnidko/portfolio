@@ -1,3 +1,6 @@
+import './curtains.js';
+import './valance.js';
+
 const header = document.querySelector('.header');
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('#site-nav');

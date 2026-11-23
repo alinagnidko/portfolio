@@ -39,8 +39,9 @@
 
     <main id="top">
       <section class="hero" aria-label="Introduction">
-        <div class="valance"></div>
+        <div class="valance"><canvas class="valance-canvas" aria-hidden="true"></canvas></div>
         <div class="stage">
+          <canvas class="curtains-canvas" aria-hidden="true"></canvas>
           <div class="curtain curtain--left" aria-hidden="true"></div>
           <div class="curtain curtain--right" aria-hidden="true"></div>
 
@@ -57,8 +58,10 @@
           </div>
 
           <p class="status">
-            <img src="/dot.svg" alt="" width="8" height="8" />
-            <span>Open to full-time roles</span>
+            <span class="status__open">
+              <img src="/dot.svg" alt="" width="8" height="8" />
+              <span>Open to full-time roles</span>
+            </span>
             <span class="status__sep">·</span>
             <a href="#now-showing">Now showing ↓</a>
           </p>
