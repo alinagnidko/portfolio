@@ -577,3 +577,35 @@ a {
     font-size: 14px;
   }
 }
+
+
+/* ---------- "Book a talk": a clapperboard that opens on hover and claps shut ---------- */
+.btn {
+  position: relative;
+  padding-top: 9px;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 10px;
+  border-radius: 8px 8px 0 0;
+  background: repeating-linear-gradient(135deg, #15110e 0 7px, #f0c866 7px 14px);
+  transform-origin: left top;
+  transition: transform 0.14s ease-in;
+}
+
+.btn:hover::before,
+.btn:focus-visible::before {
+  transform: rotate(-9deg);
+  transition-duration: 0.22s;
+  transition-timing-function: ease-out;
+}
+
+.btn:active::before {
+  transform: rotate(0);
+  transition-duration: 0.08s;
+}
