@@ -41,7 +41,7 @@ a {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   height: 103px;
-  padding: 0 64px;
+  padding: 0 max(24px, calc((100% - 1200px) / 2));
   background: var(--bg);
 }
 
@@ -69,9 +69,9 @@ a {
 
 .nav {
   display: flex;
-  gap: 32px;
-  font-size: 14px;
-  letter-spacing: 2.8px;
+  gap: 24px;
+  font-size: 13px;
+  letter-spacing: 1.8px;
   color: #fff;
   white-space: nowrap;
 }
@@ -89,13 +89,14 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 144px;
   height: 43px;
+  padding: 0 20px;
   border-radius: 8px;
   background: var(--gold);
   color: var(--bg);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 16px;
+  white-space: nowrap;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
@@ -238,6 +239,51 @@ a {
 
   .nav {
     display: none;
+  }
+
+  .brand__kicker {
+    white-space: nowrap;
+    font-size: 10px;
+    letter-spacing: 1.6px;
+  }
+
+  .brand__name {
+    font-size: 22px;
+    white-space: nowrap;
+  }
+
+  .btn {
+    height: 40px;
+    padding: 0 14px;
+    font-size: 14px;
+  }
+
+  .valance {
+    height: 28px;
+  }
+
+  .curtain {
+    width: 36px;
+  }
+
+  .frame {
+    width: calc(100% - 2 * 36px - 24px);
+  }
+
+  .frame__inner {
+    padding: 32px 16px 0;
+  }
+
+  .title {
+    font-size: clamp(30px, 9vw, 44px);
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+
+  .role {
+    font-size: 12px;
   }
 
   .stage {
