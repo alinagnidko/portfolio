@@ -11,6 +11,7 @@
   --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
   --font-display: 'Oswald', sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;
+  --ctrl-h: 46px; /* height of the header button and burger */
 }
 
 *,
@@ -43,6 +44,92 @@ a {
   height: 103px;
   padding: 0 max(24px, calc((100% - 1200px) / 2));
   background: var(--bg);
+  position: relative;
+  z-index: 10;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-self: end;
+}
+
+/* Burger — a mini cinema ticket with notches */
+.burger {
+  display: none;
+  position: relative;
+  width: 52px;
+  height: var(--ctrl-h);
+  padding: 0;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.burger::before,
+.burger::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin-top: -5px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--gold);
+}
+
+.burger::before {
+  left: -6px;
+  clip-path: inset(0 0 0 50%);
+}
+
+.burger::after {
+  right: -6px;
+  clip-path: inset(0 50% 0 0);
+}
+
+.burger:hover {
+  background: rgba(217, 164, 65, 0.12);
+}
+
+.burger span {
+  position: absolute;
+  left: 16px;
+  width: 18px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 1px;
+  transition: transform 0.25s, opacity 0.2s, top 0.25s;
+}
+
+.burger span:nth-child(1) {
+  top: calc(50% - 7px);
+}
+
+.burger span:nth-child(2) {
+  top: 50%;
+}
+
+.burger span:nth-child(3) {
+  top: calc(50% + 7px);
+}
+
+.is-open .burger span:nth-child(1) {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+.is-open .burger span:nth-child(2) {
+  opacity: 0;
+}
+
+.is-open .burger span:nth-child(3) {
+  top: 50%;
+  transform: rotate(-45deg);
 }
 
 .brand {
@@ -89,13 +176,13 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 43px;
-  padding: 0 20px;
+  height: var(--ctrl-h);
+  padding: 0 24px;
   border-radius: 8px;
   background: var(--gold);
   color: var(--bg);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
   white-space: nowrap;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -237,8 +324,101 @@ a {
     padding: 16px 24px;
   }
 
+  .burger {
+    display: block;
+  }
+
   .nav {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px max(24px, calc((100% - 1200px) / 2)) 24px;
+    background: var(--stage);
+    border-top: 1px solid rgba(217, 164, 65, 0.3);
+    border-bottom: 4px solid var(--gold);
+    box-shadow: 0 24px 40px rgba(0, 0, 0, 0.5);
+    counter-reset: scene;
+  }
+
+  .is-open .nav {
+    display: flex;
+  }
+
+  /* Each menu item is a cinema ticket with notches and a tear-off stub */
+  .nav a {
+    counter-increment: scene;
+    display: flex;
+    align-items: center;
+    position: relative;
+    height: 64px;
+    padding-left: 24px;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    background: transparent;
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 21px;
+    letter-spacing: 0;
+    color: var(--cream);
+    /* cut round notches out of the left and right edges */
+    -webkit-mask:
+      radial-gradient(circle at 0 50%, transparent 9px, #000 9.2px),
+      radial-gradient(circle at 100% 50%, transparent 9px, #000 9.2px);
+    -webkit-mask-composite: source-in;
+    mask:
+      radial-gradient(circle at 0 50%, transparent 9px, #000 9.2px),
+      radial-gradient(circle at 100% 50%, transparent 9px, #000 9.2px);
+    mask-composite: intersect;
+    transition: transform 0.2s, background 0.2s, color 0.2s;
+  }
+
+  /* gold ring that follows the notches */
+  .nav a::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 0 50%, transparent 9.2px, var(--gold) 9.4px, var(--gold) 10.4px, transparent 10.6px),
+      radial-gradient(circle at 100% 50%, transparent 9.2px, var(--gold) 9.4px, var(--gold) 10.4px, transparent 10.6px);
+  }
+
+  .nav a:hover,
+  .nav a:focus-visible,
+  .nav a:active {
+    transform: translateY(-2px);
+    background: var(--cream);
+    color: var(--bg);
+    outline: none;
+  }
+
+  .nav a::before {
+    content: 'SCENE 0' counter(scene);
+    order: 2;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 96px;
+    height: 36px;
+    border-left: 2px dashed rgba(217, 164, 65, 0.55);
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav a:hover::before,
+  .nav a:focus-visible::before,
+  .nav a:active::before {
+    color: var(--curtain-light);
+    border-left-color: #c8b99a;
   }
 
   .brand__kicker {
@@ -252,10 +432,13 @@ a {
     white-space: nowrap;
   }
 
+  :root {
+    --ctrl-h: 42px;
+  }
+
   .btn {
-    height: 40px;
-    padding: 0 14px;
-    font-size: 14px;
+    padding: 0 16px;
+    font-size: 15px;
   }
 
   .valance {
@@ -294,6 +477,18 @@ a {
     flex-wrap: wrap;
     justify-content: center;
     padding: 0 16px;
+    font-size: 14px;
+  }
+}
+
+/* Phones: keep the header compact */
+@media (max-width: 480px) {
+  :root {
+    --ctrl-h: 40px;
+  }
+
+  .btn {
+    padding: 0 14px;
     font-size: 14px;
   }
 }

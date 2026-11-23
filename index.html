@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope:wght@400;700&family=Oswald:wght@600&family=Playfair+Display&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope:wght@400;700&family=Oswald:wght@600&family=Playfair+Display:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/style.css" />
@@ -22,14 +22,19 @@
         <span class="brand__kicker">DESIGN FILM STUDIO</span>
         <span class="brand__name">ALINA HNIDKO</span>
       </a>
-      <nav class="nav" aria-label="Main">
+      <nav class="nav" id="site-nav" aria-label="Main">
         <a href="#now-showing">Now showing</a>
         <a href="#showtimes">Showtimes</a>
         <a href="#backstage">Backstage</a>
         <a href="#resume">Resume</a>
         <a href="#box-office">Box office</a>
       </nav>
-      <a class="btn" href="#box-office">Book a talk</a>
+      <div class="actions">
+        <a class="btn" href="#box-office">Book a talk</a>
+        <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </header>
 
     <main id="top">
@@ -60,5 +65,6 @@
         </div>
       </section>
     </main>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
