@@ -160,11 +160,10 @@ function init() {
     return t * t * (3 - 2 * t);
   };
 
-  // hanging freely: the inner edge is never ruler-straight, it drifts a little
-  // and the hem flares out toward the floor
-  function openShape(y) {
-    const t = y / H;
-    return 1 + 0.045 * Math.sin(t * Math.PI * 2.2 + 0.6) + 0.1 * smooth(0.45, 1, t);
+  // the open curtains hang straight down, so the inner edge is a vertical line
+  // (the folds, light and cursor sway still give them depth)
+  function openShape() {
+    return 1;
   }
 
   function widthAt(r) {
