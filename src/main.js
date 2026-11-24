@@ -5,17 +5,23 @@ const header = document.querySelector('.header');
 const burger = document.querySelector('.burger');
 const nav = document.querySelector('#site-nav');
 
-function setOpen(open) {
+function setOpen(open, { focus = false } = {}) {
   header.classList.toggle('is-open', open);
   burger.setAttribute('aria-expanded', String(open));
   burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  // keyboard users: open the menu and land on its first item; closing with Escape returns to the button
+  if (open && focus) nav.querySelector('a')?.focus();
+  if (!open && focus) burger.focus();
 }
 
-burger.addEventListener('click', () => setOpen(!header.classList.contains('is-open')));
+// a keyboard press on the button also arrives as a click with detail 0
+burger.addEventListener('click', (e) =>
+  setOpen(!header.classList.contains('is-open'), { focus: e.detail === 0 }),
+);
 nav.addEventListener('click', (e) => {
   if (e.target.closest('a')) setOpen(false);
 });
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') setOpen(false);
+  if (e.key === 'Escape' && header.classList.contains('is-open')) setOpen(false, { focus: true });
 });
 window.matchMedia('(min-width: 901px)').addEventListener('change', () => setOpen(false));

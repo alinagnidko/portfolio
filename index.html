@@ -8,10 +8,12 @@
       name="description"
       content="I design websites and apps for product and service teams, so people reach their goal faster."
     />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#15110e" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope:wght@400;700&family=Oswald:wght@600&family=Playfair+Display:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=Manrope:wght@400;700&family=Oswald:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/src/style.css" />
@@ -30,7 +32,18 @@
         <a href="#box-office">Box office</a>
       </nav>
       <div class="actions">
-        <a class="btn" href="#box-office">Book a talk</a>
+        <a class="btn" href="#box-office">
+          <svg class="btn__icon" viewBox="0 0 22 20" aria-hidden="true">
+            <rect x="1.5" y="8.5" width="19" height="10" rx="1.6" />
+            <g class="btn__clap">
+              <path
+                fill-rule="evenodd"
+                d="M1.5 4.1a1.6 1.6 0 0 1 1.6-1.6h15.8a1.6 1.6 0 0 1 1.6 1.6V7.5H1.5zM6.2 2.5h2.6l-2.6 5h-2.6zM11.9 2.5h2.6l-2.6 5h-2.6zM17.6 2.5h2.5v5h-.2z"
+              />
+            </g>
+          </svg>
+          <span>Book a talk</span>
+        </a>
         <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
           <span></span><span></span><span></span>
         </button>
@@ -63,7 +76,7 @@
               <span>Open to full-time roles</span>
             </span>
             <span class="status__sep">·</span>
-            <a href="#now-showing">Now showing ↓</a>
+            <a href="#now-showing">Now showing <span class="status__arrow" aria-hidden="true">↓</span></a>
           </p>
         </div>
       </section>
