@@ -18,8 +18,16 @@ function setOpen(open, { focus = false } = {}) {
 burger.addEventListener('click', (e) =>
   setOpen(!header.classList.contains('is-open'), { focus: e.detail === 0 }),
 );
+// when a ticket is chosen it turns cream for a moment, then the menu closes,
+// so a tap on a phone shows the same fill that a mouse shows on hover
 nav.addEventListener('click', (e) => {
-  if (e.target.closest('a')) setOpen(false);
+  const link = e.target.closest('a');
+  if (!link) return;
+  link.classList.add('is-picked');
+  setTimeout(() => {
+    link.classList.remove('is-picked');
+    setOpen(false);
+  }, 260);
 });
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && header.classList.contains('is-open')) setOpen(false, { focus: true });
