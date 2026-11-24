@@ -416,7 +416,13 @@ a {
   }
 
   .nav {
-    display: none;
+    /* always laid out, but hidden: so it can fade and slide instead of popping in and out */
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-12px);
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s;
     position: absolute;
     top: 100%;
     left: 0;
@@ -432,7 +438,50 @@ a {
   }
 
   .is-open .nav {
-    display: flex;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s;
+  }
+
+  /* the tickets slide in one after another when the menu opens */
+  .is-open .nav a {
+    animation: ticket-in 0.4s ease-out backwards;
+  }
+
+  .is-open .nav a:nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  .is-open .nav a:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+
+  .is-open .nav a:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+
+  .is-open .nav a:nth-child(5) {
+    animation-delay: 0.2s;
+  }
+
+  @keyframes ticket-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav,
+    .is-open .nav {
+      transition-duration: 0.01s;
+    }
+
+    .is-open .nav a {
+      animation: none;
+    }
   }
 
   /* Each menu item is a cinema ticket with notches and a tear-off stub */
